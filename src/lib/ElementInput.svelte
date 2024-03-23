@@ -40,7 +40,7 @@
   {:else}
     <label>
       Radius:
-      <input type="number" bind:value={element.radius} />
+      <input type="number" bind:value={element.radius} min=0 max=360 />
     </label>
     <label>
       Angle:
