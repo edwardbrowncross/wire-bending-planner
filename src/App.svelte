@@ -2,6 +2,7 @@
   import { getColour } from "./lib/Colours";
   import CurveRenderer from "./lib/CurveRenderer.svelte";
   import ElementInput from "./lib/ElementInput.svelte";
+  import FlatRenderer from "./lib/FlatRenderer.svelte";
 
   let elements: RibbonElement[] = [];
 
@@ -23,6 +24,7 @@
   <h1>Ribbon Bending Planner</h1>
   {#key JSON.stringify(elements)}
     <CurveRenderer {elements} />
+    <FlatRenderer {elements}/>
   {/key}
 
   <h2>Elements</h2>
@@ -37,4 +39,8 @@
 </main>
 
 <style>
+  main {
+    display: flex;
+    flex-direction: column;
+  }
 </style>
