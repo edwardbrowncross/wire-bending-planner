@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+    import { getColour } from "./Colours";
 
   export let startX: number | undefined = undefined;
   export let startY: number | undefined = undefined;
@@ -18,9 +19,12 @@
     let x = startX || canvas.width / 2;
     let y = startY || canvas.height;
     let angle = startAngle || -Math.PI / 2;
-    ctx.moveTo(x, y);
-
+    ctx.lineWidth = 3;
+    
     for (const element of elements) {
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.strokeStyle = getColour(elements.indexOf(element));
       if (element.type === "straight") {
         const dx = element.length * Math.cos(angle);
         const dy = element.length * Math.sin(angle);
@@ -47,9 +51,9 @@
         x = centerX + radius * Math.cos(endAngle);
         y = centerY + radius * Math.sin(endAngle);
       }
+      ctx.stroke();
     }
 
-    ctx.stroke();
   });
 </script>
 
