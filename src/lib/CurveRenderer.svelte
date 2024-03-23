@@ -21,7 +21,6 @@
     ctx.moveTo(x, y);
 
     for (const element of elements) {
-      console.log(x, y, angle);
       if (element.type === "straight") {
         const dx = element.length * Math.cos(angle);
         const dy = element.length * Math.sin(angle);
