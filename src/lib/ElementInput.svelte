@@ -4,6 +4,7 @@
   const dispatch = createEventDispatcher();
 
   export let element: RibbonElement;
+  export let colour: string;
   
   function handleChangeType(event: Event) {
     const select = event.target as HTMLSelectElement;
@@ -23,6 +24,7 @@
 </script>
 
 <fieldset>
+  <legend style="background-color: {colour}">{element.type}</legend>
   <label>
     Type:
     <select bind:value={element.type} on:change={handleChangeType}>
@@ -42,8 +44,48 @@
     </label>
     <label>
       Angle:
-      <input type="number" bind:value={element.angle} />
+      <input type="number" bind:value={element.angle} step={5} />
     </label>
   {/if}
-  <button type="button" on:click={handleDelete}>Delete</button>
+  <button type="button" on:click={handleDelete}>❌</button>
 </fieldset>
+
+<style>
+  legend {
+    border-radius: 1rem;
+    padding: 0rem 0.5rem;
+  }
+
+  fieldset {
+    margin-bottom: 0.5rem;
+    border-radius: 1rem;
+    border: 0;
+    background-color: whitesmoke;
+    display: flex;
+    align-items: center;
+  }
+
+  button {
+    margin-left: auto;
+    padding: 0.2rem;
+    background: none;
+  }
+
+  button:hover {
+    background-color: white;
+  }
+
+  input[type="number"] {
+    width: 4rem;
+  }
+
+  input, select {
+    padding: 0.3rem 0.25rem;
+    border-radius: 0.25rem;
+    border: 1px solid lightgray;
+  }
+
+  label {
+    margin-right: 1rem;
+  }
+</style>
