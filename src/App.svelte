@@ -16,7 +16,12 @@
   function handleAddElement() {
     const lastElementType = elements[elements.length - 1]?.type;
     if (lastElementType === "straight") {
-      elements = [...elements, { type: "bend", radius: 20, angle: 0 }];
+      let lastRadius;
+      const lastBend = elements.filter((e) => e.type === "bend").slice(-1)[0];
+      if (lastBend?.type === 'bend') {
+        lastRadius = lastBend?.radius;
+      }
+      elements = [...elements, { type: "bend", radius: lastRadius ?? 4, angle: 0 }];
     } else {
       elements = [...elements, { type: "straight", length: 20 }];
     }
