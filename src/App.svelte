@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { getColour } from "./lib/Colours";
   import CurveRenderer from "./lib/CurveRenderer.svelte";
   import ElementInput from "./lib/ElementInput.svelte";
   import FlatRenderer from "./lib/FlatRenderer.svelte";
+  import UrlHacker from "./lib/URLHacker.svelte";
+  import { decodeElements, type RibbonElement } from "./lib/RibbonElement";
 
   let elements: RibbonElement[] = [];
 
@@ -18,13 +21,20 @@
       elements = [...elements, { type: "straight", length: 20 }];
     }
   }
+
+  const params = new URLSearchParams(location.search);
+  const encoded = params.get("elements");
+  if (encoded) {
+    elements = decodeElements(encoded);
+  }
 </script>
 
 <main>
   <h1>Ribbon Bending Planner</h1>
   {#key JSON.stringify(elements)}
+    <UrlHacker {elements} />
     <CurveRenderer {elements} />
-    <FlatRenderer {elements}/>
+    <FlatRenderer bind:elements={elements} />
   {/key}
 
   <h2>Elements</h2>

@@ -1,11 +1,12 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from "svelte";
+  import type { RibbonElement } from "./RibbonElement";
 
   const dispatch = createEventDispatcher();
 
   export let element: RibbonElement;
   export let colour: string;
-  
+
   function handleChangeType(event: Event) {
     const select = event.target as HTMLSelectElement;
     element.type = select.value as RibbonElement["type"];
@@ -20,7 +21,6 @@
   function handleDelete() {
     dispatch("delete");
   }
-  
 </script>
 
 <fieldset>
@@ -32,7 +32,7 @@
       <option value="bend">Bend</option>
     </select>
   </label>
-  {#if element.type === 'straight'}
+  {#if element.type === "straight"}
     <label>
       Length:
       <input type="number" bind:value={element.length} />
@@ -40,7 +40,7 @@
   {:else}
     <label>
       Radius:
-      <input type="number" bind:value={element.radius} min=0 max=360 />
+      <input type="number" bind:value={element.radius} min="0" max="360" />
     </label>
     <label>
       Angle:
@@ -79,7 +79,8 @@
     width: 4rem;
   }
 
-  input, select {
+  input,
+  select {
     padding: 0.3rem 0.25rem;
     border-radius: 0.25rem;
     border: 1px solid lightgray;

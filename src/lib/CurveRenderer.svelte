@@ -1,15 +1,21 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { getColour } from "./Colours";
+  import type { RibbonElement } from "./RibbonElement";
 
   export let elements: RibbonElement[] = [];
 
   let canvas: HTMLCanvasElement;
 
   let totalWidth: number, totalHeight: number;
-  let loopGap:number;
+  let loopGap: number;
 
-  function render(startX: number=0, startY: number=0, startAngle: number=0, scaleFactor:number=1) {
+  function render(
+    startX: number = 0,
+    startY: number = 0,
+    startAngle: number = 0,
+    scaleFactor: number = 1,
+  ) {
     const ctx = canvas.getContext("2d");
     if (!ctx) {
       throw new Error("Could not get 2d context");
@@ -18,7 +24,7 @@
 
     let x = startX;
     let y = startY;
-    let angle = startAngle-Math.PI / 2;
+    let angle = startAngle - Math.PI / 2;
     ctx.lineWidth = 3;
 
     let minX = x;
@@ -69,18 +75,26 @@
       }
       ctx.stroke();
     }
-    return { minX, minY, maxX, maxY, finalX: x, finalY: y};
+    return { minX, minY, maxX, maxY, finalX: x, finalY: y };
   }
 
   onMount(() => {
     const { minX, minY, maxX, maxY, finalX, finalY } = render();
-    const scaleFactor = Math.min((canvas.width-20) / (maxX - minX), (canvas.height-20) / (maxY - minY));
+    const scaleFactor = Math.min(
+      (canvas.width - 20) / (maxX - minX),
+      (canvas.height - 20) / (maxY - minY),
+    );
     const paddingX = canvas.width - (maxX - minX) * scaleFactor;
     const paddingY = canvas.height - (maxY - minY) * scaleFactor;
     totalWidth = maxX - minX;
     totalHeight = maxY - minY;
-    loopGap = Math.sqrt(finalX*finalX + finalY*finalY);
-    render(-minX*scaleFactor + paddingX/2, -minY*scaleFactor + 3 + paddingY/2, 0, scaleFactor);
+    loopGap = Math.sqrt(finalX * finalX + finalY * finalY);
+    render(
+      -minX * scaleFactor + paddingX / 2,
+      -minY * scaleFactor + 3 + paddingY / 2,
+      0,
+      scaleFactor,
+    );
   });
 </script>
 
