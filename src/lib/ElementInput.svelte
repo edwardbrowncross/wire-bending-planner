@@ -53,7 +53,9 @@
 <style>
   legend {
     border-radius: 1rem;
-    padding: 0rem 0.5rem;
+    padding: 0rem 0.5rem 0.15rem 0.5rem;
+    color: white;
+    line-height: 1.1rem;
   }
 
   fieldset {
@@ -69,10 +71,12 @@
     margin-left: auto;
     padding: 0.2rem;
     background: none;
+    filter: grayscale(100%);
   }
 
   button:hover {
     background-color: white;
+    filter: none;
   }
 
   input[type="number"] {

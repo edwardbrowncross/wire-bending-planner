@@ -1,3 +1,5 @@
+// https://medialab.github.io/iwanthue/
+
 export const colours = [
   "#69cfdb",
   "#d7a55b",

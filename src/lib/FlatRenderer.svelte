@@ -46,19 +46,29 @@
     place-content: center;
     position: relative;
     flex-basis: 0;
+    color: white;
+    container-type: inline-size;
   }
   #ribbon .running-total {
     position: absolute;
     bottom: -1rem;
+    line-height: 1rem;
     right: 0rem;
     padding-right: 0.1rem;
     font-size: 0.8rem;
     max-width: 100%;
-    border-right: 1px solid black;
+    border-right: 1px solid #666;
     z-index: -1;
-    text-justify: right;
     overflow: hidden;
     text-overflow: ellipsis;
     box-sizing: border-box;
+    color: #444;
+  }
+
+  /* Hide running total text if the container is too small */
+  @container (max-width: 2rem) {
+    #ribbon .running-total {
+      color: transparent;
+    }
   }
 </style>

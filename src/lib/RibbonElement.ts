@@ -12,7 +12,7 @@ export function encodeElements(elements: RibbonElement[]) {
     if (element.type === 'straight') {
       return `s${element.length}`
     } else {
-      return `b${element.angle}/${element.radius}`
+      return `b${element.angle}x${element.radius}`
     }
   }).join(',')
 }
@@ -24,7 +24,7 @@ export function decodeElements(encoded: string): RibbonElement[] {
         length: parseInt(part.slice(1))
       }
     } else {
-      const [angle, radius] = part.slice(1).split('/').map(parseFloat)
+      const [angle, radius] = part.slice(1).split('x').map(parseFloat)
       return {
         type: 'bend',
         angle,

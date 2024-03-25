@@ -47,26 +47,41 @@
 </script>
 
 <main>
-  <h1>Ribbon Bending Planner</h1>
+  <h1>Wire Bending Planner</h1>
   {#key JSON.stringify(elements)}
     <CurveRenderer {elements} />
-    <FlatRenderer bind:elements={elements} />
+    <FlatRenderer bind:elements />
   {/key}
 
   <h2>Elements</h2>
-  {#each elements as element, i}
-    <ElementInput
-      bind:element
-      colour={getColour(i)}
-      on:delete={() => handleDelete(i)}
-    />
-  {/each}
+  <div id="scroll-list">
+    {#each elements as element, i}
+      <ElementInput
+        bind:element
+        colour={getColour(i)}
+        on:delete={() => handleDelete(i)}
+      />
+    {/each}
+  </div>
   <button type="button" on:click={handleAddElement}>Add Element</button>
 </main>
 
 <style>
+  h1 {
+    text-align: center;
+  }
   main {
     display: flex;
     flex-direction: column;
+    max-height: calc(100vh - 5rem);
+  }
+
+  #scroll-list {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 50vh;
+    padding-right: 1rem;
+    margin-bottom: 1rem;
   }
 </style>
